@@ -5,6 +5,7 @@ import path from 'path';
 export default defineConfig({
   server: {
     proxy: {
+      // '/api': 'http://localhost:8000/',
       '/api': 'https://linktrim-t8s2.onrender.com',
     }
   },

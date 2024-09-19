@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useShortnerContext } from '../context/ContextProvider'
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,7 @@ import Loader from '../components/Loader'
 
 export default function Login() {
 
-     document.title = 'LinkTrim ‧ Login'
+    document.title = 'LinkTrim ‧ Login'
 
     const navigate = useNavigate()
 
@@ -30,8 +30,10 @@ export default function Login() {
                         toast.success('Logged in successfully')
                         setLoading(false)
                     }).catch(err => {
-                        toast.error(err?.response?.data?.error || 'Error Error logging in, try again')
+                        toast.error(err?.response?.data?.error || 'Error logging in, try again')
                         setLoading(false)
+                        console.log('login error :', err.message);
+
                     })
             }
             else toast.error('fill the required fields')
@@ -40,24 +42,25 @@ export default function Login() {
         }
     }
 
-    if (user) return navigate('/profile')
+    useEffect(() => { user !== null ? navigate('/') : '' }, [])
+
 
     return (
         <div className='login-form-cont min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-500 h-screen pt-5'>
             <form onSubmit={handleSubmit} className='flex items-center justify-center flex-col gap-5 min-h-[80vh] '>
                 <h1 className='text-3xl font-bold opacity-50 tracking-normal'>Login to LinkTrim</h1>
                 <input
-                    className='px-5 py-3 rounded-lg w-[300px] outline-none bg-transparent border-btn'
+                    className='px-5 placeholder:opacity-50 py-3 rounded-lg w-[300px] outline-none bg-transparent border-btn'
                     type="email"
-                    placeholder='Email Address'
+                    placeholder='Email Address*'
                     value={email}
                     autoComplete='off'
                     onChange={e => setEmail(e.target.value)}
                 />
                 <input
-                    className='px-5 py-3 rounded-lg w-[300px] outline-none bg-transparent border-btn'
+                    className='px-5 py-3 placeholder:opacity-50 rounded-lg w-[300px] outline-none bg-transparent border-btn'
                     type="password"
-                    placeholder='Password'
+                    placeholder='Password*'
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
