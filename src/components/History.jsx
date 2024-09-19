@@ -15,7 +15,7 @@ export default function History() {
         if (user) {
             setLoading(true)
             try {
-                axios.get(`/api/v1/url/user-url/${user._id}`)
+                axios.get(`https://linktrim-t8s2.onrender.com/api/v1/url/user-url/${user._id}`)
                     .then(res => {
                         setUserUrls(res.data)
                         setLoading(false)

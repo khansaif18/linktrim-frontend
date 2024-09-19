@@ -13,6 +13,8 @@ export default function ContextProvider({ children }) {
     const [shortUrl, setShortUrl] = useState('')
     const [userUrls, setUserUrls] = useState('')
     const [isAuthenticating, setIsAuthenticating] = useState(false)
+
+    
     useEffect(() => {
         const token = Cookies.get('token');
         if (token) {

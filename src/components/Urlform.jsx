@@ -18,7 +18,7 @@ export default function Urlform() {
             if (user) {
                 try {
                     setLoading(true)
-                    axios.post('/api/v1/url', { url, userId: user._id })
+                    axios.post('https://linktrim-t8s2.onrender.com/api/v1/url', { url, userId: user._id })
                         .then((res) => {
                             setShortUrl(`https://linktrim-t8s2.onrender.com/short/${res.data.id}`)
                             setUrl('')
