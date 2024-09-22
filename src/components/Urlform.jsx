@@ -18,11 +18,12 @@ export default function Urlform() {
             if (user) {
                 try {
                     setLoading(true)
-                    axios.post('https://linktrim-t8s2.onrender.com/api/v1/url', { url, userId: user._id })
+                    axios.post('/api/v1/url', { url, userId: user._id })
                         .then((res) => {
                             setShortUrl(`https://linktrim-t8s2.onrender.com/short/${res.data.id}`)
                             setUrl('')
                             setLoading(false)
+                            setIsAuthenticating(prev => !prev)
                         })
                         .catch(err => {
                             toast.error('Some error occured, try again')
@@ -52,7 +53,7 @@ export default function Urlform() {
                 autoComplete='off'
                 onChange={e => setUrl(e.target.value)}
             />
-            <button type='submit' className='border-btn relative font-bold tracking-wide opacity-40 hover:opacity-100 duration-200 px-5 py-3 rounded-lg w-[350px] max-w-[95%]'>Get Short Url {loading ? <Loader/> : ""}</button>
+            <button type='submit' className='border-btn relative font-bold tracking-wide opacity-40 hover:opacity-100 duration-200 px-5 py-3 rounded-lg w-[350px] max-w-[95%]'>Get Short Url {loading ? <Loader /> : ""}</button>
         </form>
     )
 }

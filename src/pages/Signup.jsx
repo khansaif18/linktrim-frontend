@@ -27,7 +27,7 @@ export default function Signup() {
             if (formData.fullName && formData.email && formData.password && formData.cnfPassword) {
                 if (formData.password === formData.cnfPassword) {
                     setLoading(true)
-                    axios.post('https://linktrim-t8s2.onrender.com/api/v1/user/signup', { fullName: formData.fullName, email: formData.email, password: formData.password })
+                    axios.post('/api/v1/user/signup', { fullName: formData.fullName, email: formData.email, password: formData.password })
                         .then(() => {
                             setIsAuthenticating(prev => !prev)
                             toast.success('Signed up successfully')

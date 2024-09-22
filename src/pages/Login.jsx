@@ -21,7 +21,7 @@ export default function Login() {
         try {
             if (email && password) {
                 setLoading(true)
-                axios.post('https://linktrim-t8s2.onrender.com/api/v1/user/login', { email, password })
+                axios.post('/api/v1/user/login', { email, password })
                     .then(() => {
                         setIsAuthenticating(prev => !prev)
                         navigate('/')

@@ -8,32 +8,32 @@ import Loader from './Loader';
 
 export default function History() {
 
-    const { user, userUrls, setUserUrls } = useShortnerContext()
+    const { user, userUrls, setUserUrls, isAuthenticating } = useShortnerContext()
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (user) {
-            setLoading(true)
-            try {
-                axios.get(`https://linktrim-t8s2.onrender.com/api/v1/url/user-url/${user._id}`)
-                    .then(res => {
-                        setUserUrls(res.data)
-                        setLoading(false)
-                    }).catch(err => {
-                        toast.error('Something went wrong')
-                        setLoading(false)
-                    })
-            } catch (error) {
-                // console.log('Error fetching user urls : ', error);
-                toast.error('Something went wrong')
-            }
+        setLoading(true)
+        try {
+            axios.get(`/api/v1/url/user-url/${user._id}`)
+                .then(res => {
+                    setUserUrls(res.data)
+                    setLoading(false)
+                }).catch(err => {
+                    toast.error('Something went wrong')
+                    setLoading(false)
+                })
+        } catch (error) {
+            // console.log('Error fetching user urls : ', error);
+            toast.error('Something went wrong')
         }
-    }, [])
+    }, [isAuthenticating])
 
-    if(loading) return <Loader relative/>
-    if (userUrls.length < 1) return <h2>No Recent Urls found 🤷‍♂️</h2>
 
-    return (
+
+    if (loading) return <Loader relative />
+    if (userUrls && userUrls.length < 1) return <h2>No Recent Urls found 🤷‍♂️</h2>
+
+    else return (
         <div className='w-full'>
             <h2 className='text-center text-xl mb-2 font-semibold tracking-wider min-w-[350px]'> Recent Generated Urls</h2>
             <div className='flex flex-wrap items-center justify-center  rounded-md p-2 gap-2'>

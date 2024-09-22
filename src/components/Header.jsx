@@ -25,7 +25,7 @@ export default function Header() {
                     onClick={() => {
                         try {
                             setLoading(true)
-                            axios.get('https://linktrim-t8s2.onrender.com/api/v1/user/logout')
+                            axios.get('/api/v1/user/logout')
                                 .then(() => {
                                     setIsAuthenticating(prev => !prev)
                                     setUser(null)

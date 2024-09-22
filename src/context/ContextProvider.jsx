@@ -9,12 +9,12 @@ export const useShortnerContext = () => {
 }
 
 export default function ContextProvider({ children }) {
+
     const [user, setUser] = useState(null)
     const [shortUrl, setShortUrl] = useState('')
-    const [userUrls, setUserUrls] = useState('')
+    const [userUrls, setUserUrls] = useState(null)
     const [isAuthenticating, setIsAuthenticating] = useState(false)
 
-    
     useEffect(() => {
         const token = Cookies.get('token');
         if (token) {
@@ -29,11 +29,10 @@ export default function ContextProvider({ children }) {
             };
             const decodedToken = parseJwt(token);
             setUser(decodedToken)
-
         }
     }, [isAuthenticating]);
 
-    const values = { user, setUser, setIsAuthenticating, shortUrl, setShortUrl, userUrls, setUserUrls}
+    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, setUserUrls }
 
     return (
         <ShortnerContext.Provider value={values}>
