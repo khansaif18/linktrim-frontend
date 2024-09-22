@@ -13,6 +13,8 @@ export default function Header() {
     const navigate = useNavigate()
     const location = useLocation()
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const [loading, setLoading] = useState(false)
 
     if (location.pathname === '/profile') {
@@ -25,7 +27,7 @@ export default function Header() {
                     onClick={() => {
                         try {
                             setLoading(true)
-                            axios.get('/api/v1/user/logout')
+                            axios.get(`${API_URL}/v1/user/logout`)
                                 .then(() => {
                                     setIsAuthenticating(prev => !prev)
                                     setUser(null)
@@ -39,7 +41,7 @@ export default function Header() {
                             setLoading(false)
                         }
                     }}>
-                    <b className='capitalize w-[80px] flex items-center justify-center gap-2'> Logout {loading ? <Loader /> : <MdOutlineLogout /> } </b> 
+                    <b className='capitalize w-[80px] flex items-center justify-center gap-2'> Logout {loading ? <Loader /> : <MdOutlineLogout />} </b>
                 </button>
             </div>
         )

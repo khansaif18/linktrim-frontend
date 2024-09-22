@@ -9,6 +9,8 @@ export default function Signup() {
 
     document.title = 'LinkTrim ‧ Signup'
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
@@ -27,7 +29,7 @@ export default function Signup() {
             if (formData.fullName && formData.email && formData.password && formData.cnfPassword) {
                 if (formData.password === formData.cnfPassword) {
                     setLoading(true)
-                    axios.post('/api/v1/user/signup', { fullName: formData.fullName, email: formData.email, password: formData.password })
+                    axios.post(`${API_URL}/v1/user/signup`, { fullName: formData.fullName, email: formData.email, password: formData.password })
                         .then(() => {
                             setIsAuthenticating(prev => !prev)
                             toast.success('Signed up successfully')
@@ -35,7 +37,7 @@ export default function Signup() {
                             setFormData({ fullName: '', email: '', password: '', cnfPassword: '' })
                             setLoading(false)
                         }).catch(err => {
-                            toast.error(     'Error signing up, try again')
+                            toast.error('Error signing up, try again')
                             setLoading(false)
                         })
                 } else {

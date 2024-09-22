@@ -11,10 +11,12 @@ export default function History() {
     const { user, userUrls, setUserUrls, isAuthenticating } = useShortnerContext()
     const [loading, setLoading] = useState(false)
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
         setLoading(true)
         try {
-            axios.get(`/api/v1/url/user-url/${user._id}`)
+            axios.get(`${API_URL}/v1/url/user-url/${user._id}`)
                 .then(res => {
                     setUserUrls(res.data)
                     setLoading(false)

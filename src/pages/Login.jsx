@@ -9,6 +9,8 @@ export default function Login() {
 
     document.title = 'LinkTrim ‧ Login'
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
@@ -21,7 +23,7 @@ export default function Login() {
         try {
             if (email && password) {
                 setLoading(true)
-                axios.post('/api/v1/user/login', { email, password })
+                axios.post(`${API_URL}/api/v1/user/login`, { email, password })
                     .then(() => {
                         setIsAuthenticating(prev => !prev)
                         navigate('/')

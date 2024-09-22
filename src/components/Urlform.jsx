@@ -12,13 +12,15 @@ export default function Urlform() {
     const { user, setShortUrl, setIsAuthenticating } = useShortnerContext()
     const navigate = useNavigate()
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (url) {
             if (user) {
                 try {
                     setLoading(true)
-                    axios.post('/api/v1/url', { url, userId: user._id })
+                    axios.post(`${API_URL}/v1/url`, { url, userId: user._id })
                         .then((res) => {
                             setShortUrl(`https://linktrim-t8s2.onrender.com/short/${res.data.id}`)
                             setUrl('')
