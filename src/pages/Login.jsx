@@ -23,7 +23,7 @@ export default function Login() {
         try {
             if (email && password) {
                 setLoading(true)
-                axios.post(`${API_URL}/api/v1/user/login`, { email, password })
+                axios.post(`${API_URL}/v1/user/login`, { email, password }, { withCredentials: true })
                     .then(() => {
                         setIsAuthenticating(prev => !prev)
                         navigate('/')

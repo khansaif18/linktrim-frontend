@@ -27,7 +27,7 @@ export default function Header() {
                     onClick={() => {
                         try {
                             setLoading(true)
-                            axios.get(`${API_URL}/v1/user/logout`)
+                            axios.get(`${API_URL}/v1/user/logout`, {withCredentials: true})
                                 .then(() => {
                                     setIsAuthenticating(prev => !prev)
                                     setUser(null)

@@ -29,19 +29,24 @@ export default function Signup() {
             if (formData.fullName && formData.email && formData.password && formData.cnfPassword) {
                 if (formData.password === formData.cnfPassword) {
                     setLoading(true)
-                    axios.post(`${API_URL}/v1/user/signup`, { fullName: formData.fullName, email: formData.email, password: formData.password })
-                        .then(() => {
-                            setIsAuthenticating(prev => !prev)
-                            toast.success('Signed up successfully')
-                            navigate('/')
-                            setFormData({ fullName: '', email: '', password: '', cnfPassword: '' })
-                            setLoading(false)
+                    axios.post(`${API_URL}/v1/user/signup`, { fullName: formData.fullName, email: formData.email, password: formData.password }, { withCredentials: true })
+                        .then((res) => {
+                            if (res.data.error) {
+                                toast.error(res.data.error)
+                                setLoading(false)
+                            } else {
+                                setIsAuthenticating(prev => !prev)
+                                toast.success('Signed up successfully')
+                                navigate('/')
+                                setFormData({ fullName: '', email: '', password: '', cnfPassword: '' })
+                                setLoading(false)
+                            }
                         }).catch(err => {
                             toast.error('Error signing up, try again')
                             setLoading(false)
                         })
                 } else {
-                    toast.error('passwords does not match')
+                    toast.error('passwords do not match')
                 }
             }
             else {
@@ -85,7 +90,7 @@ export default function Signup() {
                 />
                 <input
                     className='px-5 py-3 placeholder:opacity-50 rounded-lg w-[300px] outline-none bg-transparent border-btn'
-                    type="text"
+                    type="password"
                     placeholder='Confirm Password*'
                     autoCorrect='off'
                     value={formData.cnfPassword}
