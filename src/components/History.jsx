@@ -34,7 +34,7 @@ export default function History() {
                                             <AiOutlineDelete />
                                         </button>
                                         <div>
-                                            <div className='text-gray-600 text-sm flex items-center justify-center gap-1'> short url : <span className='text-[#ccc] '>{`${API_URL}/${url.shortId}`.slice(0, 50) + '..'}</span>
+                                            <div className='text-gray-600 text-sm flex items-center justify-center gap-1'> short url : <span className='text-[#ccc] '>{`${API_URL}/${url.shortId}`.slice(0, 30) + '..'}</span>
                                                 <button className='mt-1 text-lg opacity-80 hover:opacity-100 duration-200'
                                                     onClick={() => {
                                                         navigator.clipboard.writeText(`${API_URL}/${url.shortId}`)
