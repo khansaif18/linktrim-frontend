@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import Loader from './Loader';
 
 export default function Header() {
-    const { user, setIsAuthenticating, setUser, setShortUrl } = useShortnerContext()
+    const { user, logout } = useShortnerContext()
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -27,18 +27,15 @@ export default function Header() {
                     onClick={() => {
                         try {
                             setLoading(true)
-                            axios.get(`${API_URL}/v1/user/logout`, {withCredentials: true})
+                            logout()
                                 .then(() => {
-                                    setIsAuthenticating(prev => !prev)
-                                    setUser(null)
-                                    setShortUrl('')
-                                    navigate('/login')
-                                    toast.success('Logged out successfully')
                                     setLoading(false)
+                                    toast.success('Logged out successfully')
+                                    navigate('/')
                                 })
+                                .catch(() => toast.error("Could'nt logout, try again"))
                         } catch (error) {
                             toast.error("Could'nt logout, try again")
-                            setLoading(false)
                         }
                     }}>
                     <b className='capitalize w-[80px] flex items-center justify-center gap-2'> Logout {loading ? <Loader /> : <MdOutlineLogout />} </b>
@@ -55,8 +52,8 @@ export default function Header() {
             {user ?
                 <div className='relative cursor-pointer flex items-center justify-evenly py-2 px-3 rounded-3xl gap-2 border-btn min-w-[80px]'
                     onClick={() => navigate('/profile')}>
-                    <img src={user.profileImageUrl} alt={user.fullName} style={{ height: '20px', width: '20px', borderRadius: '50%' }} />
-                    <b className='capitalize'>{user.fullName} </b> <FaAngleRight />
+                    <img src={user.photoURL} alt={user.photoURL} style={{ height: '20px', width: '20px', borderRadius: '50%' }} />
+                    <b className='capitalize'>{user.displayName} </b> <FaAngleRight />
                 </div> :
                 <button className="px-7 py-[5px] flex items-center gap-1 border-btn rounded-3xl tracking-wider opacity-50 hover:opacity-100 duration-200" onClick={() => navigate('/login')}
                     style={location.pathname === '/login' ? { opacity: '0' } : { opacity: '1' } && location.pathname === '/signup' ? { opacity: '0' } : { opacity: '1' }}

@@ -1,6 +1,4 @@
-.border-btn {
-    border: 1px solid #cccccc2b;
-}
+
 
 .poppins {
     font-family: "Poppins", system-ui;
@@ -99,4 +97,43 @@
 .loader .bar12 {
     transform: rotate(330deg) translate(0, -130%);
     animation-delay: -0.1s;
+}
+
+
+.google-button {
+    /* margin-top: 1rem; */
+    max-width: 320px;
+    display: flex;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    gap: 0.75rem;
+    color: rgb(65, 63, 63);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all .6s ease;
+}
+
+.google-button svg {
+    height: 24px;
+}
+
+.google-button:hover {
+    transform: scale(1.02);
+}
+
+.border-btn {
+    border: 1px solid #cccccc2b;
+    transition: 0.3s ease-in;
+}
+
+.border-hover{
+    border: 1px solid #cccc;
 }

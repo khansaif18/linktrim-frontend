@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Loader({ relative }) {
     return (
-        <div className="loader right-5 top-[12px]" style={relative ? { position: 'relative' } : { position: 'absolute' }}>
+        <div className="loader top-1 ml-[2px]" style={relative ? { position: 'relative' } : { position: 'absolute', top:'12px', right:'1.25rem' }}>
             <div className="bar1"></div>
             <div className="bar2"></div>
             <div className="bar3"></div>

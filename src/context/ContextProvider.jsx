@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import Cookies from 'js-cookie';
-import axios from 'axios';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { auth, provider } from '../firebase'
+import { toast } from 'react-hot-toast'
+import axios from 'axios'
 
 const ShortnerContext = createContext()
 
@@ -14,25 +16,54 @@ export default function ContextProvider({ children }) {
     const [shortUrl, setShortUrl] = useState('')
     const [userUrls, setUserUrls] = useState(null)
     const [isAuthenticating, setIsAuthenticating] = useState(false)
+    const [loading, setLoading] = useState(false)
+
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    async function signInWithGoogle() {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+        } catch (error) {
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        }
+    }
+
+    function logout() {
+        setUser(null)
+        setShortUrl('')
+        return signOut(auth)
+    }
 
     useEffect(() => {
-        const token = Cookies.get('token');
-        if (token) {
-            const parseJwt = (token) => {
-                const base64Url = token.split('.')[1];
-                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
-                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                }).join(''));
+        const unsubscribe = onAuthStateChanged(auth, async user => {
+            try {
+                setUser(user)
+                setIsAuthenticating(prev => !prev)
+            } catch (error) {
+                console.log(error.message);
+            }
+        })
+        return unsubscribe
+    }, [])
 
-                return JSON.parse(jsonPayload);
-            };
-            const decodedToken = parseJwt(token);
-            setUser(decodedToken)
+
+    useEffect(() => {
+        if (user) {
+            try {
+                axios.get(`${API_URL}/api/v1/url/user-url/${user.uid}`, { withCredentials: true })
+                    .then(res => {
+                        setUserUrls(res.data)
+                    })
+            } catch (error) {
+                toast.error('Something went wrong')
+            }
         }
-    }, [isAuthenticating]);
+    }, [isAuthenticating])
 
-    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, setUserUrls }
+    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, loading, setLoading, setUserUrls, signInWithGoogle, logout }
 
     return (
         <ShortnerContext.Provider value={values}>

@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 export default function Hero() {
     document.title = 'LinkTrim ‧ Home'
     const { shortUrl } = useShortnerContext()
+    
     return (
         <div className='flex flex-col items-center justify-center w-full  pt-[6rem]  overflow-hidden'>
             <Urlform />
