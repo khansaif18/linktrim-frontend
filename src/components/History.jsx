@@ -9,7 +9,7 @@ import DeleteModal from './DeleteModal';
 
 export default function History() {
 
-    const { userUrls, setLoading, setIsAuthenticating } = useShortnerContext()
+    const { userUrls, setIsAuthenticating } = useShortnerContext()
     const [showModal, setShowModal] = useState(false)
     const [urlId, setUrlId] = useState('')
 

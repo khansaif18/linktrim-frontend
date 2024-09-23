@@ -17,6 +17,8 @@ export default function ContextProvider({ children }) {
     const [userUrls, setUserUrls] = useState(null)
     const [isAuthenticating, setIsAuthenticating] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [showLogin, setShowLogin] = useState(false)
+
 
     const API_URL = import.meta.env.VITE_API_URL;
 
@@ -63,7 +65,7 @@ export default function ContextProvider({ children }) {
         }
     }, [isAuthenticating])
 
-    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, loading, setLoading, setUserUrls, signInWithGoogle, logout }
+    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, loading, setLoading, showLogin, setShowLogin, setUserUrls, signInWithGoogle, logout }
 
     return (
         <ShortnerContext.Provider value={values}>
