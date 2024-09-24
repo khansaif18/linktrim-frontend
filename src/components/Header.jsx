@@ -53,8 +53,7 @@ export default function Header() {
                     <img src={user.photoURL} alt={user.photoURL} style={{ height: '20px', width: '20px', borderRadius: '50%' }} />
                     <b className='capitalize'>{user.displayName.split(' ')[0]} </b> <FaAngleRight />
                 </div> :
-                <button className="px-7 py-[5px] flex items-center gap-1 border-btn rounded-3xl tracking-wider opacity-50 hover:opacity-100 duration-200" onClick={() => setShowLogin(true)}
-                    style={location.pathname === '/login' ? { opacity: '0' } : { opacity: '1' } && location.pathname === '/signup' ? { opacity: '0' } : { opacity: '1' }}
+                <button className="px-7 py-[5px] flex items-center gap-1 border-btn rounded-3xl tracking-wider opacity-50 hover:opacity-100 duration-200" onClick={() => setShowLogin(prev => !prev)}
                 >Login <MdLogin /> </button>
             }
         </div>

@@ -8,8 +8,7 @@ import FirstCallMessage from './FirstCallMessage';
 
 export default function Hero() {
     document.title = 'LinkTrim ‧ Home'
-    const { shortUrl, showLogin } = useShortnerContext()
-
+    const { shortUrl, showLogin, user } = useShortnerContext()
 
     return (
         <div className='flex flex-col items-center justify-center w-full  pt-[6rem]  overflow-hidden'>

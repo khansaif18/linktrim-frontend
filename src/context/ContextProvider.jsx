@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
-import { auth, provider } from '../firebase'
+import { GoogleAuthProvider, GithubAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { auth, provider, githubProvider } from '../firebase'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 
@@ -32,6 +32,18 @@ export default function ContextProvider({ children }) {
             const credential = GoogleAuthProvider.credentialFromError(error);
         }
     }
+
+    async function signInWithGithub() {
+        try {
+            const result = await signInWithPopup(auth, githubProvider);
+            const credential = GithubAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const signedInUser = result.user;
+            setUser(signedInUser);
+        } catch (error) {
+            console.log('github auth error :', error.message);
+        }
+    };
 
     function logout() {
         setUser(null)
@@ -65,7 +77,7 @@ export default function ContextProvider({ children }) {
         }
     }, [isAuthenticating])
 
-    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, loading, setLoading, showLogin, setShowLogin, setUserUrls, signInWithGoogle, logout }
+    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, loading, setLoading, showLogin, setShowLogin, setUserUrls, signInWithGoogle, signInWithGithub, logout }
 
     return (
         <ShortnerContext.Provider value={values}>
