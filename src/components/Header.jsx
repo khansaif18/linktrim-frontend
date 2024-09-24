@@ -36,7 +36,7 @@ export default function Header() {
                             toast.error("Could'nt logout, try again")
                         }
                     }}>
-                    <b className='capitalize w-[80px] flex items-center justify-center gap-2'> Logout {loading ? <Loader /> : <MdOutlineLogout />} </b>
+                    <b className='capitalize w-[100px] flex items-center justify-center gap-2'> Logout {loading ? <Loader /> : <MdOutlineLogout />} </b>
                 </button>
             </div>
         )
@@ -51,7 +51,7 @@ export default function Header() {
                 <div className='relative cursor-pointer flex items-center justify-evenly py-2 px-3 rounded-3xl gap-2 border-btn min-w-[80px]'
                     onClick={() => navigate('/profile')}>
                     <img src={user.photoURL} alt={user.photoURL} style={{ height: '20px', width: '20px', borderRadius: '50%' }} />
-                    <b className='capitalize'>{user.displayName} </b> <FaAngleRight />
+                    <b className='capitalize'>{user.displayName.split(' ')[0]} </b> <FaAngleRight />
                 </div> :
                 <button className="px-7 py-[5px] flex items-center gap-1 border-btn rounded-3xl tracking-wider opacity-50 hover:opacity-100 duration-200" onClick={() => setShowLogin(true)}
                     style={location.pathname === '/login' ? { opacity: '0' } : { opacity: '1' } && location.pathname === '/signup' ? { opacity: '0' } : { opacity: '1' }}

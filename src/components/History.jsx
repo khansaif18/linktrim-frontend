@@ -25,14 +25,20 @@ export default function History() {
                             {
                                 userUrls && userUrls.map(url => (
                                     <div key={url._id} className='border-btn py-5 px-3 rounded-md w-[320px] gap-2 flex  items-center justify-center flex-col opacity-60 hover:opacity-100 duration-100 cursor-default relative'>
-                                        <button className='absolute top-1 left-1 bg-blue-400 p-1 text-lg rounded-3xl opacity-50 hover:opacity-100 duration-100'
-                                            onClick={() => {
-                                                setShowModal(true)
-                                                setUrlId(url._id)
-                                            }}
-                                        >
-                                            <AiOutlineDelete />
-                                        </button>
+                                        <div className='flex items-center justify-center w-full gap-2'>
+                                            <div className='flex w-[65%] items-center justify-center gap-2 border-btn px-4 py-1 rounded-md tracking-wide opacity-70'>
+                                                <TbBrandGoogleAnalytics />
+                                                <p className='text-sm'>total visits : {url.visitHistory.length}</p>
+                                            </div>
+                                            <button className=' border-btn p-1 text-lg rounded-sm opacity-50 hover:opacity-100 duration-100'
+                                                onClick={() => {
+                                                    setShowModal(true)
+                                                    setUrlId(url._id)
+                                                }}
+                                            >
+                                                <AiOutlineDelete />
+                                            </button>
+                                        </div>
                                         <div>
                                             <div className='text-gray-600 text-sm flex items-center justify-center gap-1'> short url : <span className='text-[#ccc] '>{`${API_URL}/${url.shortId}`.slice(0, 30) + '..'}</span>
                                                 <button className='mt-1 text-lg opacity-80 hover:opacity-100 duration-200'
@@ -48,10 +54,6 @@ export default function History() {
                                                         toast.success('url copied to clipboard')
                                                     }}><IoCopyOutline /></button>
                                             </div>
-                                        </div>
-                                        <div className='flex w-[80%] items-center justify-center gap-2 border-btn px-4 py-1 rounded-md tracking-wide opacity-70'>
-                                            <TbBrandGoogleAnalytics />
-                                            <p className='text-sm'>total visits : {url.visitHistory.length}</p>
                                         </div>
                                     </div>
                                 ))
@@ -72,10 +74,10 @@ export default function History() {
                                 setIsAuthenticating(prev => !prev)
                             })
                             .catch(err => {
-                                console.log('error deleting : ', err);
+                                toast.error('could not delete url, try again')
                             })
                     } catch (error) {
-                        console.log('error deleting url ', error);
+                        toast.error('could not delete url, try again')
                     }
                 }}
 
