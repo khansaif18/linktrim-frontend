@@ -4,13 +4,14 @@ import toast from 'react-hot-toast'
 
 export default function SigninGoogle() {
 
-    const { user, signInWithGoogle, setShowLogin } = useShortnerContext()
+    const { user, signInWithGoogle, setShowLogin, setBurger } = useShortnerContext()
 
     return (
         <button className="google-button bg-transparent border-btn  text-white" onClick={() => {
             try {
                 signInWithGoogle().then(() => {
                     setShowLogin(false)
+                    setBurger(false)
                     toast.success(user ? `Signed in as ${user?.displayName}` : 'Signed in successfully')
                 })
             } catch (error) {

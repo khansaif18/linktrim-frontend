@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 
 export default function SigninGithub() {
 
-    const { user, signInWithGithub, setShowLogin } = useShortnerContext()
+    const { user, signInWithGithub, setShowLogin, setBurger } = useShortnerContext()
 
     return (
         <button className="google-button bg-transparent border-btn  text-white" onClick={() => {
@@ -12,6 +12,7 @@ export default function SigninGithub() {
                 signInWithGithub().then(() => {
                     toast.success(user ? `Signed in as ${user?.displayName}` : 'Signed in successfully')
                     setShowLogin(false)
+                    setBurger(false)
                 })
             } catch (error) {
                 toast.error('Could not log  in, try again')

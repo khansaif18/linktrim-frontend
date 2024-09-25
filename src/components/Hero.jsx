@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Urlform from './Urlform'
 import { useShortnerContext } from '../context/ContextProvider'
 import { IoCopyOutline } from "react-icons/io5";
 import toast from 'react-hot-toast';
-import Login from './Login';
 import FirstCallMessage from './FirstCallMessage';
 
 export default function Hero() {
+
     document.title = 'LinkTrim ‧ Home'
-    const { shortUrl, showLogin, user } = useShortnerContext()
+    const { shortUrl } = useShortnerContext()
 
     return (
         <div className='flex flex-col items-center justify-center w-full  pt-[6rem]  overflow-hidden'>
             <Urlform />
-            {showLogin ? <Login /> : ''}
             {
                 shortUrl ?
                     <div className='  '>

@@ -6,10 +6,11 @@ import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { AiOutlineDelete } from "react-icons/ai";
 import toast from 'react-hot-toast';
 import DeleteModal from './DeleteModal';
+import Loader from './Loader';
 
 export default function History() {
 
-    const { userUrls, setIsAuthenticating } = useShortnerContext()
+    const { userUrls, setIsAuthenticating, loading, setLoading } = useShortnerContext()
     const [showModal, setShowModal] = useState(false)
     const [urlId, setUrlId] = useState('')
 
@@ -17,7 +18,7 @@ export default function History() {
 
     return (
         <>
-            {
+            {loading ? <Loader relative /> :
                 userUrls && userUrls.length < 1 ? <h2 className='font-bold tracking-wide mt-2 text-xl'>No Recent Urls found 🤷‍♂️</h2> :
                     <div className='w-full'>
                         <h2 className='text-center text-xl mb-2 font-semibold tracking-wider min-w-[350px]'> Recent Generated Urls</h2>
@@ -64,6 +65,7 @@ export default function History() {
             {showModal ? <DeleteModal
                 handelDelete={() => {
                     try {
+                        setLoading(true)
                         axios.delete(`${API_URL}/api/v1/url/delete/${urlId}`)
                             .then(res => {
                                 if (res.data.error) {
@@ -78,6 +80,8 @@ export default function History() {
                             })
                     } catch (error) {
                         toast.error('could not delete url, try again')
+                    } finally {
+                        setLoading(false)
                     }
                 }}
 

@@ -18,6 +18,7 @@ export default function ContextProvider({ children }) {
     const [isAuthenticating, setIsAuthenticating] = useState(false)
     const [loading, setLoading] = useState(false)
     const [showLogin, setShowLogin] = useState(false)
+    const [burger, setBurger] = useState(false)
 
 
     const API_URL = import.meta.env.VITE_API_URL;
@@ -67,17 +68,20 @@ export default function ContextProvider({ children }) {
     useEffect(() => {
         if (user) {
             try {
+                setLoading(true)
                 axios.get(`${API_URL}/api/v1/url/user-url/${user.uid}`, { withCredentials: true })
                     .then(res => {
                         setUserUrls(res.data)
                     })
             } catch (error) {
                 toast.error('Something went wrong')
+            } finally {
+                setLoading(false)
             }
         }
     }, [isAuthenticating])
 
-    const values = { user, setUser, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, loading, setLoading, showLogin, setShowLogin, setUserUrls, signInWithGoogle, signInWithGithub, logout }
+    const values = { user, setUser, burger, setBurger, isAuthenticating, setIsAuthenticating, shortUrl, setShortUrl, userUrls, loading, setLoading, showLogin, setShowLogin, setUserUrls, signInWithGoogle, signInWithGithub, logout }
 
     return (
         <ShortnerContext.Provider value={values}>

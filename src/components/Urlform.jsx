@@ -9,7 +9,7 @@ export default function Urlform() {
 
     const [url, setUrl] = useState('')
     const [loading, setLoading] = useState(false)
-    const { user, setShortUrl, setIsAuthenticating, setShowLogin } = useShortnerContext()
+    const { user, setShortUrl, setIsAuthenticating, setBurger } = useShortnerContext()
     const navigate = useNavigate()
 
     const API_URL = import.meta.env.VITE_API_URL;
@@ -36,7 +36,7 @@ export default function Urlform() {
                     setLoading(false)
                 }
             } else {
-                setShowLogin(true)
+                setBurger(true)
                 toast.error('please login first..')
             }
         }
