@@ -8,7 +8,7 @@ export default function DeleteModal({ handleCancel, handelDelete }) {
     const { loading } = useShortnerContext()
 
     return (
-        <div className='fixed mt-[-10rem]  z-50 w-full h-screen flex items-center justify-center backdrop-blur-[2px]'>
+        <div className='fixed mt-[-10rem]  z-50 w-full h-screen flex items-center justify-center backdrop-blur-md'>
             <div
                 className="border-hover bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600  rounded-xl overflow-hidden shadow-xl w-[300px] "
             >

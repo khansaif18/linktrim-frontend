@@ -72,10 +72,10 @@ export default function ContextProvider({ children }) {
                 axios.get(`${API_URL}/api/v1/url/user-url/${user.uid}`, { withCredentials: true })
                     .then(res => {
                         setUserUrls(res.data)
+                        setLoading(false)
                     })
             } catch (error) {
                 toast.error('Something went wrong')
-            } finally {
                 setLoading(false)
             }
         }

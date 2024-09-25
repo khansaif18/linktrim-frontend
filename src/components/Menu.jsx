@@ -15,8 +15,8 @@ export default function Menu() {
     return (
         <div className=
             ' fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-screen backdrop-blur-md flex  justify-center '>
-            <div className="card relative overflow-hidden mt-[12rem] p-4 h-fit w-72 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600  rounded-md pt-8">
-                <button className='absolute top-1 right-1 p-[2px] rounded-3xl text-2xl duration-200 opacity-35 hover:opacity-60'
+            <div className="card relative overflow-hidden mt-[12rem] p-4 h-fit w-72 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600  rounded-md pt-10">
+                <button className='absolute top-[10px] right-2 p-[2px] rounded-3xl text-2xl duration-200 opacity-35 hover:opacity-60'
                     onClick={() => setBurger(false)}><IoCloseSharp /></button>
                 <ul className="w-full p-3 flex flex-col gap-2">
                     {user ?
