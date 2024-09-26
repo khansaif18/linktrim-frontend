@@ -9,7 +9,7 @@ export default function Navbar() {
     const { user, burger } = useShortnerContext()
     const navigate = useNavigate()
     return (
-        <div className=' fixed top-0 letf-0 w-full z-50 '>
+        <div className=' fixed top-0 letf-0 w-full z-50 backdrop-blur-md'>
             <nav className=' w-full flex items-center justify-around px-5 p-2  gap-10 z-50'>
                 <button className='text-2xl font-bold tracking-wider'
                     onClick={() => navigate('/')}>
@@ -18,7 +18,7 @@ export default function Navbar() {
                     <Burger />
                 </button>
             </nav>
-            {burger && !user ? <Login /> : burger && user ? <Menu /> : ''}
+            {/* {burger && !user ? <Login /> : burger && user ? <Menu /> : ''} */}
         </div>
     )
 }

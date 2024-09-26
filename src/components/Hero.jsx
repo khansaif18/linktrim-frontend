@@ -8,13 +8,13 @@ import FirstCallMessage from './FirstCallMessage';
 export default function Hero() {
 
     document.title = 'LinkTrim ‧ Home'
-    const { shortUrl } = useShortnerContext()
+    const { shortUrl, userUrls } = useShortnerContext()
 
     return (
         <div className='flex flex-col items-center justify-center w-full  pt-[6rem]  overflow-hidden'>
             <Urlform />
             {
-                shortUrl ?
+                shortUrl && userUrls !== null ?
                     <div className='  '>
                         <h2 className='opacity-55 font-bold text-center mb-2'>Copy the short url below and share</h2>
                         <p className='border-btn py-2 px-1 rounded-md min-w-[340px] flex items-center justify-center gap-2 opacity-45 cursor-default'>{shortUrl} <button onClick={() => {

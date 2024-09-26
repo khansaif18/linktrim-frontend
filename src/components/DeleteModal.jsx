@@ -10,12 +10,12 @@ export default function DeleteModal({ handleCancel, handelDelete }) {
     return (
         <div className='fixed mt-[-10rem]  z-50 w-full h-screen flex items-center justify-center backdrop-blur-md'>
             <div
-                className="border-hover bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600  rounded-xl overflow-hidden shadow-xl w-[300px] "
+                className=" bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600  rounded-xl overflow-hidden shadow-xl w-[300px] "
             >
                 <div className="p-4 ">
                     <h2 className="text-3xl font-extrabold mb-1 text-white opacity-70 tracking-wide">DELETE URL?</h2>
-                    <p className="text-md mb-4 opacity-40 text-white bg-slate-700 w-fit px-2 py-[1px] rounded">
-                        This can not be undone.
+                    <p className="text-md mb-2 opacity-40 text-white bg-slate-700 w-fit px-2 py-[1px] rounded">
+                        This can not be undone
                     </p>
                     <div className="flex justify-end space-x-4">
                         <button onClick={handleCancel}
