@@ -7,7 +7,7 @@ export default function Burger() {
 
     return (
         <button style={{ transform: 'scale(0.5)', opacity:'0.5', cursor:'default' }}>
-            <label className="bar " htmlFor="check">
+            <label className="bar morebaaar jadabaaar" htmlFor="check">
                 <input
                     type="checkbox"
                     id="check"
